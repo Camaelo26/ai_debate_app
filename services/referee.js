@@ -61,3 +61,4 @@ async function getRefereeScore(referee, argument1, argument2) {
 }
 
 module.exports = { getRefereeScore };
+
