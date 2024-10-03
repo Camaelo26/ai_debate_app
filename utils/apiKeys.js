@@ -58,7 +58,7 @@ async function getGemmaResponse(prompt) {
     messages: [{ role: "user", content: prompt }],
     model: "gemma2-9b-it",
     temperature: 1,
-    max_tokens: 1024,
+    max_tokens: 200,
     top_p: 1,
     stream: false,
   });
