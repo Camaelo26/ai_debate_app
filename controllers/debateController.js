@@ -41,12 +41,12 @@ async function startDebate(req, res) {
     });
   }
 
-  // Determine the winner based on the average score
+  // Determine the winner based on the average score, and use debater names from the request body
   let winner;
   if (debater1TotalScore > debater2TotalScore) {
-    winner = debater1;
+    winner = req.body.debater1;  // Ensure the winner is the name of debater1
   } else if (debater2TotalScore > debater1TotalScore) {
-    winner = debater2;
+    winner = req.body.debater2;  // Ensure the winner is the name of debater2
   } else {
     winner = "Tie";
   }
@@ -56,7 +56,7 @@ async function startDebate(req, res) {
     debateResults,
     debater1TotalScore,
     debater2TotalScore,
-    winner: winner
+    winner: winner  // Return the correct debater name as the winner
   });
 }
 
