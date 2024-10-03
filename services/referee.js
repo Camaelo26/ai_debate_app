@@ -1,8 +1,6 @@
-const { getGPTResponse } = require('../utils/apiKeys');
-const { getGeminiResponse } = require('../utils/apiKeys');
-const { getLLaMAResponse } = require('../utils/apiKeys');
+const { getGPTResponse, getGeminiResponse, getLLaMAResponse, getGemmaResponse } = require('../utils/apiKeys');
 
-// Fetch referee's score based on the selected API (GPT-4, Gemini, LLaMA)
+// Fetch referee's score based on the selected API (GPT-4, Gemini, LLaMA, Gemma)
 async function getRefereeScore(referee, argument1, argument2) {
   const debatePrompt = `Evaluate the arguments provided:
   
@@ -20,19 +18,21 @@ async function getRefereeScore(referee, argument1, argument2) {
   let refereeResponse;
   
   try {
-    // Get response from the appropriate API
+    // Get response from the appropriate AI
     if (referee === "GPT-4") {
       refereeResponse = await getGPTResponse(debatePrompt);
     } else if (referee === "Gemini") {
       refereeResponse = await getGeminiResponse(debatePrompt);
     } else if (referee === "LLaMA") {
       refereeResponse = await getLLaMAResponse(debatePrompt);
+    } else if (referee === "Gemma") {
+      refereeResponse = await getGemmaResponse(debatePrompt);
     }
 
-    // Log the raw response for debugging
-    console.log("Referee Response:", refereeResponse);
+  console.log("referee response:",refereeResponse);
+  // Sanitize the response: remove markdown-style ** and other unwanted characters
+  refereeResponse = refereeResponse.replace(/\*\*/g, '');
 
-    // Updated regex to capture both whole and decimal scores
     const scoreRegex = /Debater 1 Score:\s*(\d+(\.\d+)?)\/10\s*Remark:\s*(.+)\s*Debater 2 Score:\s*(\d+(\.\d+)?)\/10\s*Remark:\s*(.+)/i;
     const match = scoreRegex.exec(refereeResponse);
 
@@ -47,15 +47,12 @@ async function getRefereeScore(referee, argument1, argument2) {
         debater2: { score: debater2Score, remark: debater2Remark }
       };
     } else {
-      // Fallback in case the regex doesn't match
-      console.error("Score extraction failed. Response format may be incorrect.");
       return {
         debater1: { score: "0", remark: "No valid score" },
         debater2: { score: "0", remark: "No valid score" }
       };
     }
   } catch (error) {
-    console.error("Error fetching referee response:", error);
     return {
       debater1: { score: "0", remark: "Error during evaluation" },
       debater2: { score: "0", remark: "Error during evaluation" }
