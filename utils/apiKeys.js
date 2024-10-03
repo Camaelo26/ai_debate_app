@@ -10,6 +10,9 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY,  // Use the API key from environment variables
 });
+const gemmaGroq = new Groq({
+  apiKey: process.env.GEMMA2_API_KEY,  // New API key for Gemma
+});
 
 async function getGPTResponse(prompt) {
   const response = await openai.chat.completions.create({
@@ -50,8 +53,21 @@ async function getLLaMAResponse(prompt) {
   }
 }
 
+async function getGemmaResponse(prompt) {
+  const chatCompletion = await gemmaGroq.chat.completions.create({
+    messages: [{ role: "user", content: prompt }],
+    model: "gemma2-9b-it",
+    temperature: 1,
+    max_tokens: 1024,
+    top_p: 1,
+    stream: false,
+  });
+  return chatCompletion.choices[0]?.message?.content;
+}
+
 module.exports = {
   getGPTResponse,
   getGeminiResponse,
   getLLaMAResponse,
+  getGemmaResponse,  // Export the new Gemma response function
 };
