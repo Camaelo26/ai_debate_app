@@ -3,9 +3,8 @@
 
 // Example shared logic (if needed in the future)
 function sharedLogic() {
-    // Placeholder for common functionality
-    return "Shared logic or utility function.";
-  }
-  
-  module.exports = { sharedLogic };
-  
+  // Placeholder for common functionality
+  return "Shared logic or utility function.";
+}
+
+module.exports = { sharedLogic };
