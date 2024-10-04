@@ -3,7 +3,7 @@ const { getRefereeScore } = require('../services/referee');
 
 // Controller function to manage the debate process
 async function startDebate(req, res) {
-  const { debater1, debater2, referee1, referee2, topic } = req.body;
+  const { debater1, debater2, referee1, referee2,referee3,referee4, topic } = req.body;
   let debateResults = [];
   
   let debater1TotalScore = 0;
@@ -17,9 +17,11 @@ async function startDebate(req, res) {
     // Both referees evaluate the arguments
     const referee1Result = await getRefereeScore(referee1, argument1, argument2);
     const referee2Result = await getRefereeScore(referee2, argument1, argument2);
+    const referee3Result = await getRefereeScore(referee3, argument1, argument2);
+    const referee4Result = await getRefereeScore(referee4, argument1, argument2);
 
-    const debater1Score = (parseInt(referee1Result.debater1.score) || 0) + (parseInt(referee2Result.debater1.score) || 0);
-    const debater2Score = (parseInt(referee1Result.debater2.score) || 0) + (parseInt(referee2Result.debater2.score) || 0);
+    const debater1Score = (parseInt(referee1Result.debater1.score) || 0) + (parseInt(referee2Result.debater1.score) || 0) + (parseInt(referee3Result.debater1.score) || 0) + (parseInt(referee4Result.debater1.score) || 0);
+    const debater2Score = (parseInt(referee1Result.debater2.score) || 0) + (parseInt(referee2Result.debater2.score) || 0) + (parseInt(referee3Result.debater2.score) || 0) + (parseInt(referee4Result.debater2.score) || 0);
 
     // Track total scores
     debater1TotalScore += debater1Score / 2;  // Average across both referees
@@ -37,6 +39,14 @@ async function startDebate(req, res) {
       referee2: {
         debater1: { score: referee2Result.debater1.score, remark: referee2Result.debater1.remark },
         debater2: { score: referee2Result.debater2.score, remark: referee2Result.debater2.remark }
+      },
+      referee3: {
+        debater1: { score: referee3Result.debater1.score, remark: referee3Result.debater1.remark },
+        debater2: { score: referee3Result.debater2.score, remark: referee3Result.debater2.remark }
+      },
+      referee4: {
+        debater1: { score: referee4Result.debater1.score, remark: referee4Result.debater1.remark },
+        debater2: { score: referee4Result.debater2.score, remark: referee4Result.debater2.remark }
       }
     });
   }
@@ -61,4 +71,3 @@ async function startDebate(req, res) {
 }
 
 module.exports = { startDebate };
-
