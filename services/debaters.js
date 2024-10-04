@@ -2,20 +2,24 @@ const { getGPTResponse, getGeminiResponse, getLLaMAResponse, getGemmaResponse, g
 const { sharedLogic } = require('../utils/common'); // Example shared logic if needed
 
 // Fetch debater's response based on the selected API
-async function getDebaterResponse(debater, topic) {
+async function getDebaterResponse(debater, topic, role) {
+  const prompt = `${role}: ${topic}`;
+
   if (debater === "GPT-4") {
-    return await getGPTResponse(topic); // Using OpenAI GPT-4
+    return await getGPTResponse(prompt); // Using OpenAI GPT-4
   } else if (debater === "Gemini") {
-    return await getGeminiResponse(topic); // Using Gemini API
+    return await getGeminiResponse(prompt); // Using Gemini API
   } else if (debater === "LLaMA") {
-    return await getLLaMAResponse(topic); // Using LLaMA API
+    return await getLLaMAResponse(prompt); // Using LLaMA API
   } else if (debater === "Gemma") {
-    return await getGemmaResponse(topic); // Using Gemma API
+    return await getGemmaResponse(prompt); // Using Gemma API
   } else if (debater === "Mixtral") {
-    return await getMixtralresponse(topic); // Using mixtral API
+    return await getMixtralresponse(prompt); // Using mixtral API
   } else if (debater === "GroqLlama") {
-    return await getGroqLLamaResponse(topic); // Using mixtral API
+    return await getGroqLLamaResponse(prompt); // Using GroqLlama API
   }
 }
 
+
 module.exports = { getDebaterResponse };
+
