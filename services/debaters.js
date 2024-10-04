@@ -1,4 +1,4 @@
-const { getGPTResponse, getGeminiResponse, getLLaMAResponse, getGemmaResponse } = require('../utils/apiKeys');
+const { getGPTResponse, getGeminiResponse, getLLaMAResponse, getGemmaResponse, getMixtralresponse,getGroqLLamaResponse } = require('../utils/apiKeys');
 const { sharedLogic } = require('../utils/common'); // Example shared logic if needed
 
 // Fetch debater's response based on the selected API
@@ -11,6 +11,10 @@ async function getDebaterResponse(debater, topic) {
     return await getLLaMAResponse(topic); // Using LLaMA API
   } else if (debater === "Gemma") {
     return await getGemmaResponse(topic); // Using Gemma API
+  } else if (debater === "Mixtral") {
+    return await getMixtralresponse(topic); // Using mixtral API
+  } else if (debater === "GroqLlama") {
+    return await getGroqLLamaResponse(topic); // Using mixtral API
   }
 }
 
