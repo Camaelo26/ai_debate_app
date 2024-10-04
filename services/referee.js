@@ -1,6 +1,6 @@
-const { getGPTResponse, getGeminiResponse, getLLaMAResponse, getGemmaResponse } = require('../utils/apiKeys');
+const { getGPTResponse, getGeminiResponse, getLLaMAResponse, getGemmaResponse, getMixtralresponse , getGroqLLamaResponse } = require('../utils/apiKeys');
 
-// Fetch referee's score based on the selected API (GPT-4, Gemini, LLaMA, Gemma)
+// Fetch referee's score based on the selected API (GPT-4, Gemini, LLaMA, Gemma,Mixtral, GroqLLama)
 async function getRefereeScore(referee, argument1, argument2) {
   const debatePrompt = `Evaluate the arguments provided:
   
@@ -27,7 +27,13 @@ async function getRefereeScore(referee, argument1, argument2) {
       refereeResponse = await getLLaMAResponse(debatePrompt);
     } else if (referee === "Gemma") {
       refereeResponse = await getGemmaResponse(debatePrompt);
+    } else if (referee === "Mixtral") {
+      refereeResponse = await getMixtralresponse(debatePrompt);
+    } else if (referee === "GroqLLama") {
+      refereeResponse = await getGroqLLamaResponse(debatePrompt);
     }
+
+
 
   console.log("referee response:",refereeResponse);
   // Sanitize the response: remove markdown-style ** and other unwanted characters
