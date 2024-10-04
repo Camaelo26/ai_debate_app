@@ -13,6 +13,12 @@ const groq = new Groq({
 const gemmaGroq = new Groq({
   apiKey: process.env.GEMMA2_API_KEY,  // New API key for Gemma
 });
+const mixtralGroq = new Groq({
+  apiKey: process.env.MIXTRAL_API_KEY,  // New API key for mixtral
+});
+const LLamalGroq = new Groq({
+  apiKey: process.env.LLAMA3_API_KEY,  // New API key for LLama3
+});
 
 async function getGPTResponse(prompt) {
   const response = await openai.chat.completions.create({
@@ -65,9 +71,36 @@ async function getGemmaResponse(prompt) {
   return chatCompletion.choices[0]?.message?.content;
 }
 
+async function getMixtralresponse(prompt) {
+  const chatCompletion = await mixtralGroq.chat.completions.create({
+    messages: [{ role: "user", content: prompt }],
+    model: "mixtral-8x7b-32768",
+    temperature: 1,
+    max_tokens: 200,
+    top_p: 1,
+    stream: false,
+  });
+  return chatCompletion.choices[0]?.message?.content;
+}
+
+async function getGroqLLamaResponse(prompt) {
+  const chatCompletion = await LLamalGroq.chat.completions.create({
+    messages: [{ role: "user", content: prompt }],
+    model: "llama3-groq-8b-8192-tool-use-preview",
+    temperature: 0.5,
+    max_tokens: 200,
+    top_p: 0.5,
+    stream: false,
+  });
+  return chatCompletion.choices[0]?.message?.content;
+}
+
+
 module.exports = {
   getGPTResponse,
   getGeminiResponse,
   getLLaMAResponse,
-  getGemmaResponse,  // Export the new Gemma response function
+  getGemmaResponse,
+  getMixtralresponse,
+  getGroqLLamaResponse,  
 };
