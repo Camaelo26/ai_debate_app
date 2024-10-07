@@ -156,7 +156,7 @@ const DebateForm = () => {
               type="text"
               value={debater1Role}
               onChange={(e) => setDebater1Role(e.target.value)}
-              placeholder="e.g. Defend Islam"
+              placeholder="give the debater his role"
               required
             />
           </div>
@@ -183,7 +183,7 @@ const DebateForm = () => {
               type="text"
               value={debater2Role}
               onChange={(e) => setDebater2Role(e.target.value)}
-              placeholder="e.g. Defend Christianity"
+              placeholder="give the debater his role(the antithesis)"
               required
             />
           </div>
