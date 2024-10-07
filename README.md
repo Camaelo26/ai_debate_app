@@ -16,7 +16,7 @@ The AI-Powered Debate System allows users to simulate debates between different 
 - **Backend**: Node.js with Express
 - **Frontend**: React.js
 - **APIs**: OpenAI GPT-4, Google Generative AI (Gemini), LLaMA, Gemma, Mixtral, GroqLlama
-- **Hosting**: AWS (EC2, S3, CloudFront)
+- **Hosting**: AWS (EC2 backend, S3 frontend)
 - **Text-to-Speech**: Web Speech API
 
 ## Installation
