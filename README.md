@@ -19,6 +19,8 @@ The AI-Powered Debate System allows users to simulate debates between different 
 - **Hosting**: AWS (EC2 backend, S3 frontend)
 - **Text-to-Speech**: Web Speech API
 
+## Testing videos link
+https://youtu.be/xKlCkzx8LGQ
 ## Installation
 
 ### Prerequisites
