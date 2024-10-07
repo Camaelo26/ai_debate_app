@@ -50,3 +50,18 @@ npm start
 5-Start the frontend
 cd  debate-app-frontend
 npm start
+
+
+**Usage**
+Navigate to the main page in your browser.
+Select two AI debaters and their respective roles.
+Select four AI referees.
+Enter a debate topic.
+Click "Start Debate" to begin a multi-round debate.
+View the arguments and referee scores after each round.
+Use the Text-to-Speech feature to listen to arguments.
+Future Enhancements
+Add more AI models and integrations.
+Store debate history in a database for analysis.
+Improve referee scoring algorithms.
+Enable real-time multi-user debates.
