@@ -47,7 +47,7 @@ const DebateForm = () => {
     };
 
     try {
-      const response = await fetch('http://ec2-52-91-44-51.compute-1.amazonaws.com/startDebate', {
+      const response = await fetch('http://localhost:3000/startDebate', {
         method: 'POST',
         body: JSON.stringify(debateData),
         headers: { 'Content-Type': 'application/json' }
