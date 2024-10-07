@@ -1,10 +1,12 @@
 const express = require('express');
+const cors = require('cors');
 require('dotenv').config();
 
 const debateController = require('./controllers/debateController'); // Import debate controller
 
 const app = express();
 app.use(express.json()); // Middleware to parse JSON request bodies
+app.use(cors());
 
 // Define a route for starting the debate
 app.post('/startDebate', debateController.startDebate);
