@@ -26,13 +26,14 @@ OpenAI
 Google Generative AI (Gemini)
 Groq (LLaMA, Gemma, Mixtral, GroqLlama)
 
-Steps
-Clone the repository
 
-Install dependencies:
+Steps
+1-Clone the repository:
+
+2-Install dependencies:
 npm install
 
-Create a .env file in the root directory and add your API keys:
+3- Create a .env file in the root directory and add your API keys:
 
 bash
 Copy code
@@ -43,6 +44,9 @@ GEMMA2_API_KEY=your-gemma-key
 MIXTRAL_API_KEY=your-mixtral-key
 LLAMA3_API_KEY=your-llama-key
 
-Start the backend server
-
-Start the frontend
+4-Start the backend server
+cd debate-app-backend
+npm start
+5-Start the frontend
+cd  debate-app-frontend
+npm start
